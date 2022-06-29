@@ -224,6 +224,13 @@ namespace IdentityServerHost.Quickstart.UI
                 return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
             }
 
+            var origemRequest = Request.Headers["Referer"];
+
+            if (origemRequest.Any())
+            {               
+                return Redirect(origemRequest.First());
+            }
+
             return View("LoggedOut", vm);
         }
 

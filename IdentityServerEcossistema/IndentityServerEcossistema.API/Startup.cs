@@ -88,8 +88,8 @@ namespace IndentityServerEcossistema.API
             IdentityModelEventSource.ShowPII = false;
 
             app.UseCors(builder =>
-                 builder
-                   .WithOrigins("http://localhost:3000")
+                 builder                   
+                   .WithOrigins(new string[] { "http://localhost:3000", "http://localhost:4200" })
                    .AllowAnyHeader()
                    .AllowAnyMethod()
                    .AllowCredentials()
@@ -105,8 +105,7 @@ namespace IndentityServerEcossistema.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "IndentityServerEcossistema.API v1"));
+                app.UseSwagger();                
 
                 app.UseSwaggerUI(setup =>
                  {
@@ -148,7 +147,7 @@ namespace IndentityServerEcossistema.API
                     new OpenApiSecurityRequirement
                     {
                         [new OpenApiSecurityScheme {Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "oauth2"}}]
-                            = new[] { "doughnutapi" }
+                            = new[] { "doughnutapi,react-puc" }
                     }
                 };
                 }

@@ -30,6 +30,11 @@ namespace IndentityServerEcossistema.ConsoleClient
 
             HttpResponseMessage resposta = await client.GetAsync("doughnuts/endpoint-console");
 
+            if (!resposta.IsSuccessStatusCode)
+            {
+                return resposta.ReasonPhrase;
+            }
+
             var result = await resposta.Content.ReadAsStringAsync();
 
             return result;
